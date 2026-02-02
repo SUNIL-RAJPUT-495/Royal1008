@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ye Marquee Animation ke liye hai */
+@layer utilities {
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
+}
+
+.gold-button {
+  background: linear-gradient(180deg, #FCD34D 0%, #D97706 100%); /* Gold Gradient */
+  color: #000000; /* Black text for readability */
+  border: 1px solid #F59E0B;
+  border-radius: 4px; /* Thoda sa round corners */
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.gold-button:hover {
+  filter: brightness(1.1); /* Hover karne par thoda bright */
+}
+
+
+.match-card {
+  background-color: #0F213E; /* Lighter navy background */
+  color: white;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #1E3A8A; /* Halka sa border */
+}
