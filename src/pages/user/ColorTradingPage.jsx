@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Timer, Wallet, History, HelpCircle, Trophy, TrendingUp } from 'lucide-react';
-import { Navebar } from '../component/Navebar';
+import { Navebar } from '../../component/Navebar';
 
 export const ColorTradingPage = () => {
   const [timeLeft, setTimeLeft] = useState(30); // 30 Seconds Timer

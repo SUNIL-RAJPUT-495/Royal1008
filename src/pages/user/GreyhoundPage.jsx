@@ -1,5 +1,5 @@
 import React from 'react';
-import { PawPrint, Clock, MapPin, ChevronRight, Timer, Trophy } from 'lucide-react';
+import { PawPrint, Clock, MapPin, ChevronRight, Timer} from 'lucide-react';
 
 export const GreyhoundPage = () => {
 

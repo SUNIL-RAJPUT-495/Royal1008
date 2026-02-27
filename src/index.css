@@ -40,3 +40,21 @@
   align-items: center;
   border: 1px solid #1E3A8A; /* Halka sa border */
 }
+
+@layer components {
+  .card-bg {
+    @apply bg-[#0a192f];
+  }
+  
+  .sub-border {
+    @apply border-[#1E3A8A];
+  }
+  
+  .gold-text {
+    @apply text-[#D4AF37];
+  }
+  
+  .gold-btn {
+    @apply w-full py-4 bg-gradient-to-b from-[#F3C669] via-[#D4AF37] to-[#8E6E1E] text-black font-extrabold uppercase tracking-widest text-lg rounded-sm shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:brightness-110 active:scale-95 transition-all duration-300;
+  }
+}

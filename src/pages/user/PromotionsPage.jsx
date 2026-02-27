@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Gift, ShieldCheck, Copy } from 'lucide-react';
-import { Navebar } from '../component/Navebar'; // Navbar Import
+import { Navebar } from '../../component/Navebar'; // Navbar Import
 
 export const PromotionsPage = () => {
   const [activeTab, setActiveTab] = useState('All');

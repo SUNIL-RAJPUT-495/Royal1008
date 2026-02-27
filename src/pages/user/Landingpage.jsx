@@ -3,7 +3,7 @@ import { Crown, Trophy, Smartphone, ShieldCheck, Menu, X, ChevronRight, PlayCirc
 import { useNavigate } from 'react-router-dom';
 
 
-import { Navebar } from '../component/Navebar';
+import { Navebar } from '../../component/Navebar';
 
 export const Landingpage = () => {
  const navigate = useNavigate();
