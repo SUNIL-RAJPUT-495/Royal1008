@@ -5,7 +5,8 @@ import {
   ChevronRight, Flame, MonitorPlay, Clock, Palette 
 } from 'lucide-react';
 
-export const Sidebar = ({ isOpen, setIsOpen }) => {
+// Yahan 'setIsOpen' ki jagah 'closeSidebar' receive karein
+export const Sidebar = ({ isOpen, closeSidebar }) => {
   const [activeTab, setActiveTab] = useState('Cricket');
   const navigate = useNavigate(); 
 
@@ -16,38 +17,46 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
     { name: 'Cricket', icon: <Trophy size={18} />, count: 5, path: '/cricket' },
     { name: 'Football', icon: <Gamepad2 size={18} />, count: 42, path: '/football' },
     { name: 'Tennis', icon: <MonitorPlay size={18} />, count: 8, path: '/tennis' },
-    
-    // 2. New Color Prediction Option Added Here
     { name: 'Color Prediction', icon: <Palette size={18} />, count: 'HOT', path: '/colortrading' }, 
-
     { name: 'Casino', icon: <Gift size={18} />, count: null, path: '/casino' }, 
-    
     { name: 'Horse Racing', icon: <Flame size={18} />, count: 3, path: '/horseracing' },
     { name: 'Greyhound', icon: <Clock size={18} />, count: 11, path: '/greyhound' },
   ];
+
+  // Mobile check function
+  const handleMobileClose = () => {
+    if (window.innerWidth < 768 && closeSidebar) { 
+      closeSidebar(); 
+    }
+  };
 
   const handleNavigation = (item) => {
     setActiveTab(item.name);
     if (item.path) {
       navigate(item.path);
     }
-    if (window.innerWidth < 768) { 
-        setIsOpen(false); 
-    }
+    // Mobile par click hone ke baad sidebar band karein
+    handleMobileClose();
+  };
+
+  const handleQuickLinkNavigation = (path) => {
+    navigate(path);
+    handleMobileClose();
   };
 
   return (
     <>
+      {/* Overlay - click karne par bhi closeSidebar call hoga */}
       {isOpen && (
         <div 
           className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden"
-          onClick={() => setIsOpen(false)}
+          onClick={closeSidebar}
         />
       )}
 
       <aside 
         className={`
-          fixed top-20 left-0 h-[calc(100vh-5rem)] w-64 bg-[#051126] border-r border-[#D4AF37]/30 
+          fixed top-16 md:top-20 left-0 h-[calc(100vh-4rem)] md:h-[calc(100vh-5rem)] w-64 bg-[#051126] border-r border-[#D4AF37]/30 
           transform transition-transform duration-300 ease-in-out z-40 overflow-y-auto
           ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0
           [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-[#051126] [&::-webkit-scrollbar-thumb]:bg-[#D4AF37]/50
@@ -94,7 +103,6 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
                   </span>
                 )}
                 
-                {/* Special styling for HOT tag or counts */}
                 {item.count !== null && (
                   <span className={`text-xs font-bold ${
                     item.count === 'HOT' ? 'text-red-500 animate-pulse' : 
@@ -110,12 +118,12 @@ export const Sidebar = ({ isOpen, setIsOpen }) => {
           ))}
         </div>
 
-        <div className="mt-4 px-4">
+        <div className="mt-4 px-4 pb-6">
           <h3 className="text-xs font-bold text-[#D4AF37] uppercase tracking-wider mb-2 opacity-80">Quick Links</h3>
           <ul className="space-y-1">
-            <li className="text-gray-400 text-sm hover:text-[#D4AF37] cursor-pointer py-1">My Bets</li>
-            <li className="text-gray-400 text-sm hover:text-[#D4AF37] cursor-pointer py-1">Transaction History</li>
-            <li className="text-gray-400 text-sm hover:text-[#D4AF37] cursor-pointer py-1">Rules & Regulations</li>
+            <li onClick={() => handleQuickLinkNavigation('/bets')} className="text-gray-400 text-sm hover:text-[#D4AF37] cursor-pointer py-1 transition-colors">My Bets</li>
+            <li onClick={() => handleQuickLinkNavigation('/transactions')} className="text-gray-400 text-sm hover:text-[#D4AF37] cursor-pointer py-1 transition-colors">Transaction History</li>
+            <li onClick={() => handleQuickLinkNavigation('/rules')} className="text-gray-400 text-sm hover:text-[#D4AF37] cursor-pointer py-1 transition-colors">Rules & Regulations</li>
           </ul>
         </div>
       </aside>
