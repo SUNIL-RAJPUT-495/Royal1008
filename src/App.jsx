@@ -34,9 +34,9 @@ function App() {
       <Route path="/promotions" element={<PromotionsPage />} />
 
       <Route element={<MainLayout />}>
-
-        <Route path="/casino" element={<CasinoPage />} />
         <Route path="/cricket" element={<CricketPage />} />
+        <Route path="/casino" element={<CasinoPage />} />
+
         <Route path="/football" element={<FootballPage />} />
         <Route path="/tennis" element={<TennisPage />} />
         <Route path="/horseracing" element={<HorseRacingPage />} />
@@ -50,12 +50,12 @@ function App() {
         <Route path='bets' element={<MyBetsPage />} />
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
-      <Route index element={<AdminDashboard />}/>
+        <Route index element={<AdminDashboard />} />
         <Route path="dashboard" element={<AdminDashboard />} />
-        <Route path='users' element={<AdminUsers/>}/>
-        <Route path='deposits' element={<AdminDeposits/>}/>
-        <Route path='withdrawals'element={<AdminWithdrawals/>}/>
-        <Route path='settings' element={<AdminSettings/>}/>
+        <Route path='users' element={<AdminUsers />} />
+        <Route path='deposits' element={<AdminDeposits />} />
+        <Route path='withdrawals' element={<AdminWithdrawals />} />
+        <Route path='settings' element={<AdminSettings />} />
       </Route>
     </Routes>
   );

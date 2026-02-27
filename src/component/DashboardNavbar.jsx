@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Crown, Wallet, PlusCircle, User, Bell, ChevronDown, LogOut, History } from 'lucide-react';
-import logo from '../assets/logo.png'; // Make sure path is correct
+// Yahan maine 'Menu' icon add kiya hai
+import { Crown, Wallet, PlusCircle, User, Bell, ChevronDown, LogOut, History, Menu } from 'lucide-react';
+import logo from '../assets/logo.png'; 
 
-export const DashboardNavbar = () => {
+// Prop mein 'toggleSidebar' receive karein
+export const DashboardNavbar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
-  // Dummy balance (API banne ke baad ye backend se aayega)
+  // Dummy balance
   const walletBalance = "5,420.00"; 
 
   // --- ROYAL THEME STYLES ---
@@ -26,23 +28,34 @@ export const DashboardNavbar = () => {
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           
-          {/* --- LEFT: LOGO SECTION --- */}
-          <Link to="/casino" className="flex items-center gap-2 md:gap-3 cursor-pointer">
-            <div className={`relative h-10 w-10 md:h-12 md:w-12 rounded-full border border-[#D4AF37] bg-black/40 shadow-[0_0_15px_rgba(212,175,55,0.3)] flex items-center justify-center overflow-hidden`}>
-              {logo ? (
-                <img src={logo} alt="Royal Logo" className="h-full w-full object-cover" />
-              ) : (
-                <Crown className="h-6 w-6 text-[#D4AF37]" />
-              )}
-            </div>
-            {/* Mobile par sirf 'R1008', Desktop par poora naam */}
-            <span className="text-lg md:text-xl font-bold tracking-wider text-white">
-              <span className="hidden md:inline">ROYAL</span><span className="md:hidden">R</span><span className={textGoldGradient}>1008</span>
-            </span>
-          </Link>
+          {/* --- LEFT: MENU BUTTON & LOGO SECTION --- */}
+          <div className="flex items-center gap-2 md:gap-3">
+            
+            {/* Mobile Menu Button - Sirf mobile par dikhega */}
+            <button 
+              onClick={toggleSidebar}
+              className="md:hidden p-1 text-[#D4AF37] hover:bg-[#1E3A8A]/30 rounded transition-colors"
+            >
+              <Menu size={26} />
+            </button>
+
+            <Link to="/casino" className="flex items-center gap-2 md:gap-3 cursor-pointer">
+              <div className={`relative h-10 w-10 md:h-12 md:w-12 rounded-full border border-[#D4AF37] bg-black/40 shadow-[0_0_15px_rgba(212,175,55,0.3)] flex items-center justify-center overflow-hidden`}>
+                {logo ? (
+                  <img src={logo} alt="Royal Logo" className="h-full w-full object-cover" />
+                ) : (
+                  <Crown className="h-6 w-6 text-[#D4AF37]" />
+                )}
+              </div>
+              {/* Mobile par sirf 'R1008', Desktop par poora naam */}
+              <span className="text-lg md:text-xl font-bold tracking-wider text-white">
+                <span className="hidden md:inline">ROYAL</span><span className="md:hidden">R</span><span className={textGoldGradient}>1008</span>
+              </span>
+            </Link>
+          </div>
 
           {/* --- RIGHT: WALLET & PROFILE SECTION --- */}
-          <div className="flex items-center gap-3 md:gap-5">
+          <div className="flex items-center gap-2 md:gap-5">
             
             {/* Notification Bell (Optional) */}
             <button className="hidden md:flex text-gray-400 hover:text-[#D4AF37] transition relative">
@@ -51,7 +64,7 @@ export const DashboardNavbar = () => {
             </button>
 
             {/* --- THE WALLET BOX --- */}
-            <div className="flex items-center bg-[#1E3A8A]/30 border border-[#1E3A8A] rounded-sm p-1 shadow-inner">
+            <div className="flex items-center gap-2 bg-[#1E3A8A]/30 border border-[#1E3A8A] rounded-sm p-1 shadow-inner">
               
               {/* Balance Show */}
               <div className="flex flex-col justify-center px-2 md:px-3 text-right">
@@ -66,18 +79,19 @@ export const DashboardNavbar = () => {
                 onClick={() => navigate('/deposit')}
                 className={depositBtnClass}
               >
-                <PlusCircle size={16} className="md:hidden" /> {/* Mobile par sirf '+' icon */}
-                <span className="hidden md:inline text-xs md:text-sm">Deposit</span> {/* Desktop par text */}
+                <PlusCircle size={16} className="md:hidden" /> 
+                <span className="hidden md:inline text-xs md:text-sm">Deposit</span> 
               </button>
             </div>
 
             {/* --- PROFILE DROPDOWN --- */}
-            <div className="relative">
+            <div className="relative ml-1 md:ml-0">
               <button 
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
-                className="flex items-center justify-center h-10 w-10 rounded-full border border-[#D4AF37]/50 bg-[#0a192f] hover:bg-[#1E3A8A]/50 transition text-[#D4AF37]"
+                className="flex items-center justify-center h-9 w-9 md:h-10 md:w-10 rounded-full border border-[#D4AF37]/50 bg-[#0a192f] hover:bg-[#1E3A8A]/50 transition text-[#D4AF37]"
               >
-                <User size={20} />
+                <User size={18} className="md:hidden" />
+                <User size={20} className="hidden md:block" />
               </button>
 
               {/* Profile Dropdown Menu */}
